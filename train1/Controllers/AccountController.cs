@@ -85,7 +85,8 @@ namespace train1.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "UserName or Password is in correct");
+                    ModelState.AddModelError("", "UserName or Password is incorrect");
+                  
                 }
 
             }
