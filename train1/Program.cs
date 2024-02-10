@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using train1.Models;
+using train1.Repository;
 
 namespace train1
 {
@@ -22,10 +23,10 @@ namespace train1
            {
                options.Password.RequiredLength = 8;
                
-           })
-                .AddEntityFrameworkStores<ApplicationContext>();
-            
+           }).AddEntityFrameworkStores<ApplicationContext>();
 
+           builder.Services.AddScoped<IUserRepository, UserRepository>();
+            builder.Services.AddScoped<IAccountRepository, AccountRepository>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

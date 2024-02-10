@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Build.Framework;
 using train1.Models;
 using train1.ViewModel;
+using train1.Repository;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace train1.Controllers
 {
@@ -10,14 +12,20 @@ namespace train1.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
-        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+        private readonly IAccountRepository _accountRepository;
+        public AccountController( UserManager<ApplicationUser> userManager
+                                , SignInManager<ApplicationUser> signInManager
+                                , IAccountRepository accountRepository)
         {
-            _userManager = userManager;
-            _signInManager = signInManager;
+            this._userManager = userManager;
+            this._signInManager = signInManager;
+            this._accountRepository = accountRepository;
         }
 
         public IActionResult Registe()
         {
+            // ViewData["roleList"]=new SelectList( _accountRepository.GetRoles(),nameof(IdentityRole.Id), nameof(IdentityRole.Name)); 
+            ViewData["roleList"] = new SelectList(_accountRepository.GetRoles());
             return View();
         }
         [HttpPost]
@@ -39,8 +47,23 @@ namespace train1.Controllers
                 IdentityResult result= await  _userManager.CreateAsync(userModel, userVM.Password);
                 if (result.Succeeded)
                 {
-                    //await _userManager.AddToRoleAsync(userModel, "user");
-                    await _signInManager.SignInAsync(userModel,isPersistent:false);
+                    if (userVM.RoleName == "admin")
+                    {
+                        await _userManager.AddToRoleAsync(userModel, "admin");
+                    }
+                    else if (userVM.RoleName =="employee")
+                    {
+                        await _userManager.AddToRoleAsync(userModel, "employee");
+                    }
+                    else if(userVM.RoleName == "user")
+                    {
+                       await _userManager.AddToRoleAsync(userModel, "user");
+                    }
+                    else
+                    {
+                       await _userManager.AddToRoleAsync(userModel, "user");
+                    }
+                        await _signInManager.SignInAsync(userModel,isPersistent:false);
                     return RedirectToAction("Login");
                 }
                 else
@@ -53,6 +76,7 @@ namespace train1.Controllers
                 }
                 
             }
+            ViewData["roleList"] = _accountRepository.GetRoles();
             return View(userVM);
         }
         
@@ -75,18 +99,14 @@ namespace train1.Controllers
                     if (found)
                     {
                        await _signInManager.SignInAsync(userModel, userVM.RememberMe);
-                        //if (User.IsInRole("admin"))
-                        //else if(User.IsInRole("teacher"))
-                        //else if (User.IsInRole("student"))
-
-                        return RedirectToAction("Index", "Home");
-
+                        return RedirectToAction("GetAll","User");
                     }
+                    else
+                        ModelState.AddModelError("", "UserName or Password is incorrect");
                 }
                 else
                 {
                     ModelState.AddModelError("", "UserName or Password is incorrect");
-                  
                 }
 
             }

@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
+
 
 namespace train1.ViewModel
 {
@@ -23,5 +25,7 @@ namespace train1.ViewModel
         public string Email {  get; set; } = string.Empty;
 
         public string Address {  get; set; } = string.Empty;
+        public string RoleName { get; set; } = string.Empty;
+
     }
 }

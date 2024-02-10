@@ -1,13 +1,12 @@
 ﻿@model List<ApplicationUser>
 @{
-    ViewData["Title"] = "Users Page";
+    ViewData["Title"] = "Users";
 }
-
 <div class="text-center">
     <h1 class="display-4">Users Page</h1>
    
 </div>
-<table class="table table-bordered table-hover">
+<table class="table">
     <thead>
         <tr>
             <td>FirstName</td>
@@ -15,8 +14,7 @@
             <td>Age</td>
             <td>UserName</td>
             <td>Email</td>
-            <td>Edit</td>
-            <td>Delete</td>
+            <td> </td>
         </tr>
     </thead>
     @foreach(var item in Model)
@@ -27,8 +25,13 @@
             <td>@item.Age</td>
             <td>@item.UserName</td>
             <td>@item.Email</td>
-            <td><a asp-action="Edit" asp-controller="Home" asp-route-Id="@item.Id">Edit</a></td>
-            <td><a asp-action="Delete" asp-controller="Home" asp-route-Id="@item.Id">Delete</a></td>
+            <td>
+                <a asp-action="Edit" asp-controller="User" asp-route-Id="@item.Id"
+                    class="btn btn-primary">Edit</a>
+                <a asp-action="Delete" asp-controller="user" asp-route-Id="@item.Id" class="btn btn-danger"
+                onclick="return confirm('Are you sure to delete this item..?')" >Delete</a>
+            </td>
         </tr>
     }
 </table>
+<a asp-action="Add" class="btn btn-success">Add User</a>
