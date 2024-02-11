@@ -1,0 +1,45 @@
+﻿@model Product
+
+@{
+    ViewData["Title"] = "Edit Product";
+}
+
+<h1>Edit product</h1>
+<hr />
+ <form asp-action="Edit">
+     
+     <div class="form-group">
+         <label asp-for="Name" ></label>
+         <input asp-for="Name" class="form-control" />
+         <span asp-validation-for="Name" class="text-danger"></span>
+     </div>
+     <div class="form-group">
+         <label asp-for="Price" ></label>
+         <input asp-for="Price" class="form-control" />
+         <span asp-validation-for="Price" class="text-danger"></span>
+     </div>
+     <div class="form-group">
+         <label asp-for="ImageURl"></label>
+         <input asp-for="ImageURl" class="form-control" />
+         <span asp-validation-for="ImageURl" class="text-danger"></span>
+     </div>
+     <div class="form-group">
+         <label asp-for="Description"></label>
+         <input asp-for="Description" class="form-control" />
+         <span asp-validation-for="Description" class="text-danger"></span>
+     </div>
+     <div class="form-group">
+         <label asp-for="Category_Id" ></label>
+        <select asp-for="Category_Id" asp-items="ViewBag.listCategory" class="form-control">
+        </select>
+         <span asp-validation-for="Category_Id" class="text-danger"></span>
+     </div>
+  
+        <input type="submit" value="Save" class="btn btn-success" />
+     <a asp-action="GetAll47" class="btn btn-success">Back to List</a>
+ </form>
+@section Scripts{
+    <script src="~/lip/jqyery/dist/jquery.min.js"></script>
+    <script src="~/lip/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lip/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

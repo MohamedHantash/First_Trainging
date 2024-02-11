@@ -8,6 +8,7 @@ namespace train1.Models
         [Key]
         public  int Id { get; set; }
         [Column(TypeName ="varchar(50)")]
+        [Required]
         public string Name { get; set; } = string.Empty;
         
         public List<Product>? Products { get; set; }

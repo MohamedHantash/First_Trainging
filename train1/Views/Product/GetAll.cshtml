@@ -1,0 +1,44 @@
+﻿@model List<Product>
+@{
+    ViewData["Title"] = "Products";
+}
+
+<h1>Products</h1>
+<br />
+<table class="table">
+    <thead>
+        <tr>
+            <td>ID</td>
+            <td>Name</td>
+            <td>Price</td>
+            <td>Image</td>
+            <td>Description</td>
+            <td>Category</td>
+            <td></td>
+        </tr>
+    </thead>
+    @foreach(Product item in Model)
+    {
+       <tr>
+            <td>@item.Id</td>
+            <td>@item.Name</td>
+            <td>@item.Price</td>
+            <td> <img src="~/images/@item.Id" /></td>
+            <td>@item.Description</td>
+            <td>@item.Category.Name</td>
+            <td>
+                <a asp-action="Details" asp-route-Id="@item.Id"  class="btn btn-primary" >
+                    Details
+                </a>
+                <a asp-action="Edit" asp-route-Id="@item.Id" class="btn btn-primary">
+                    Edit
+                </a>
+                <a asp-action="Delete" asp-route-Id="@item.Id" class="btn btn-danger"
+                    onclick="return confirm('Are your sure to delete this item ...?')">
+                    Delete
+                </a>
+            </td>
+       </tr>
+    }
+</table>
+<a asp-action="Add" class="btn btn-success">Add</a> 

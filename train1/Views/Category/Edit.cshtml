@@ -1,0 +1,22 @@
+﻿@model Category
+@{
+    ViewData["Title"] = "Edit Category";
+}
+
+<h1>Edit Category</h1>
+<form method="post">
+    <div>
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <input type="submit" value="Edit" class="btn btn-success" />
+    <a asp-action="GetAll" class="btn btn-success">Back To List</a>
+</form>
+
+@section Scripts{
+    <script src="~/lip/jqyery/dist/jquery.min.js"></script>
+    <script src="~/lip/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lip/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}
+

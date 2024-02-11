@@ -21,14 +21,15 @@
                     <ul class="navbar-nav flex-grow-1">
                         @if(User.IsInRole("student")){ 
                             <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="GetAll">Users Page</a>
-                        </li>
+                                 <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="GetAll">Users Page</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Category" asp-action="GetAll">Categories</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="GetAll">Products</a>
+                            </li>
                         }
-                        @if(User.IsInRole("admin")){
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        } 
                     </ul>
                     <ul class="navbar-nav ">
                        @if(!User.Identity.IsAuthenticated)
@@ -45,6 +46,7 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="SignOut">SignOut</a>
                             </li>
+
                         }
 
                     </ul>

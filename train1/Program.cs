@@ -26,7 +26,11 @@ namespace train1
            }).AddEntityFrameworkStores<ApplicationContext>();
 
            builder.Services.AddScoped<IUserRepository, UserRepository>();
-            builder.Services.AddScoped<IAccountRepository, AccountRepository>();
+           builder.Services.AddScoped<IAccountRepository, AccountRepository>();
+           builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+           builder.Services.AddScoped<IProductRepository, ProductRepository>(); 
+
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
