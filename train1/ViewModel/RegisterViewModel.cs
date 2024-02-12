@@ -13,13 +13,13 @@ namespace train1.ViewModel
 
         [DataType(DataType.Password)]
         [Required]
-        [MinLength(8)]
+        [MinLength(6)]
         public string Password { get; set; } = string.Empty;
 
         [DataType(DataType.Password)]
         [Compare("Password")]
         [Required]
-        [MinLength(8)]
+        [MinLength(6)]
         public string ConfirmPassword { get; set; }=string.Empty;
         
         public string Email {  get; set; } = string.Empty;

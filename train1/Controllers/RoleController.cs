@@ -6,7 +6,7 @@ using train1.ViewModel;
 
 namespace train1.Controllers
 {
-    [Authorize(Roles ="admin")]
+
     public class RoleController : Controller
     {
         private readonly RoleManager<IdentityRole> _roleManager;
@@ -14,7 +14,7 @@ namespace train1.Controllers
         { 
             this._roleManager = roleManager;
         }
-        [Authorize(Roles ="admin")]
+        
         public IActionResult AddRole()
         {
             return View();

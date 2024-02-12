@@ -1,4 +1,6 @@
-﻿using train1.Models;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using train1.Models;
 namespace train1.Repository
 {
     public class UserRepository : IUserRepository
@@ -12,13 +14,13 @@ namespace train1.Repository
         {
             return _context.Users.ToList();
         }
+        public List<IdentityRole> GetAllRole()
+        {
+            return _context.Roles.ToList();
+        }
         public ApplicationUser GetById(string id)
         {
             return _context.Users.FirstOrDefault(u => u.Id == id);
-        }
-        public void Add(ApplicationUser user)
-        {
-            _context.Users.Add(user);
         }
         public void Update(ApplicationUser user)
         {

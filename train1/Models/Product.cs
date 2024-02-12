@@ -22,6 +22,7 @@ namespace train1.Models
         public string Description { get; set; } = string.Empty;
 
         [ForeignKey("Category")]
+        [Display(Name ="Category")]
         public int Category_Id { get; set; }
         public Category? Category { get; set; }
     }

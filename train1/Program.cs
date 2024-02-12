@@ -21,12 +21,15 @@ namespace train1
             // Add services to userManager ,signinManager
            builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
            {
-               options.Password.RequiredLength = 8;
+               options.Password.RequiredLength = 6;
+               options.Password.RequireDigit = true;
+               options.Password.RequireNonAlphanumeric = false;
+               options.Password.RequireUppercase = false;
+               options.Password.RequireLowercase = false;
                
            }).AddEntityFrameworkStores<ApplicationContext>();
 
            builder.Services.AddScoped<IUserRepository, UserRepository>();
-           builder.Services.AddScoped<IAccountRepository, AccountRepository>();
            builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
            builder.Services.AddScoped<IProductRepository, ProductRepository>(); 
 

@@ -13,6 +13,7 @@
             <td>LastName</td>
             <td>Age</td>
             <td>UserName</td>
+            <td>Role</td>
             <td>Email</td>
             <td> </td>
         </tr>
@@ -24,6 +25,7 @@
             <td>@item.LastName</td>
             <td>@item.Age</td>
             <td>@item.UserName</td>
+            <td></td>
             <td>@item.Email</td>
             <td>
                 <a asp-action="Edit" asp-controller="User" asp-route-Id="@item.Id"
@@ -34,4 +36,4 @@
         </tr>
     }
 </table>
-<a asp-action="Add" class="btn btn-success">Add User</a>
+<a asp-action="Registe" class="btn btn-success">Add User</a>

@@ -12,74 +12,13 @@ namespace train1.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly IAccountRepository _accountRepository;
+        
         public AccountController( UserManager<ApplicationUser> userManager
-                                , SignInManager<ApplicationUser> signInManager
-                                , IAccountRepository accountRepository)
+                                , SignInManager<ApplicationUser> signInManager )
         {
             this._userManager = userManager;
             this._signInManager = signInManager;
-            this._accountRepository = accountRepository;
         }
-
-        public IActionResult Registe()
-        {
-            // ViewData["roleList"]=new SelectList( _accountRepository.GetRoles(),nameof(IdentityRole.Id), nameof(IdentityRole.Name)); 
-            ViewData["roleList"] = new SelectList(_accountRepository.GetRoles());
-            return View();
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task< IActionResult> Registe(RegisterViewModel userVM)
-        { 
-            if (ModelState.IsValid)
-            {
-                ApplicationUser userModel = new ApplicationUser()
-                {
-                    FirstName = userVM.FirstName,
-                    LastName = userVM.LastName,
-                    Age = userVM.Age,
-                    Email = userVM.Email,
-                    UserName = userVM.UserName,
-                    PasswordHash = userVM.Password,
-                    Address = userVM.Address,
-                };
-                IdentityResult result= await  _userManager.CreateAsync(userModel, userVM.Password);
-                if (result.Succeeded)
-                {
-                    if (userVM.RoleName == "admin")
-                    {
-                        await _userManager.AddToRoleAsync(userModel, "admin");
-                    }
-                    else if (userVM.RoleName =="employee")
-                    {
-                        await _userManager.AddToRoleAsync(userModel, "employee");
-                    }
-                    else if(userVM.RoleName == "user")
-                    {
-                       await _userManager.AddToRoleAsync(userModel, "user");
-                    }
-                    else
-                    {
-                       await _userManager.AddToRoleAsync(userModel, "user");
-                    }
-                        await _signInManager.SignInAsync(userModel,isPersistent:false);
-                    return RedirectToAction("Login");
-                }
-                else
-                {
-                    foreach(var item in result.Errors)
-                    {
-                        ModelState.AddModelError("",item.Description);
-                    }
-                    //ModelState.AddModelError("", result.Errors.FirstOrDefault().Description);
-                }
-                
-            }
-            ViewData["roleList"] = _accountRepository.GetRoles();
-            return View(userVM);
-        }
-        
 
         public IActionResult Login()
         {
