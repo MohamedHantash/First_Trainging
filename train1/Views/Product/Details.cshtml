@@ -3,18 +3,19 @@
 @{
     ViewData["Title"] = "Details Product";
 }
-
-<h1>Details</h1>
-
-<div class="card" style="width:400px;border-block-color:blue">
-    <img src="~/images/@Model.ImageURl" style="width:80px">
-    <div class="container">
-        <h4> Name  = <b>@Model.Name</b></h4>
-        <h4> Salary = <b>@Model.Price $ </b></h4>
-        <h4> Description = <b>@Model.Description</b></h4>
-        <h4> Category = <b>@Model.Category.Name</b></h4>
-    </div>
-</div>
 <div>
-    <a asp-action="GetAll" class="btn btn-success">Back To List</a>
+    <h1>Details</h1>
+
+    <div class="card" style="width:400px;border-block-color:blue">
+        <img src="~/images/@Model.ImageURl" style="width:80px">
+        <div class="container">
+            <h4> Name  = <b>@Model.Name</b></h4>
+            <h4> Salary = <b>@Model.Price $ </b></h4>
+            <h4> Description = <b>@Model.Description</b></h4>
+            <h4> Category = <b>@Model.Category.Name</b></h4>
+        </div>
+    </div>
+    <div>
+        <a asp-action="GetAll" class="btn btn-primary">Back To List</a>
+    </div>
 </div>

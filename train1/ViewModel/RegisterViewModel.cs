@@ -21,6 +21,8 @@ namespace train1.ViewModel
         [Required]
         [MinLength(6)]
         public string ConfirmPassword { get; set; }=string.Empty;
+
+        public string ImageURL { get; set; } = string.Empty;
         
         public string Email {  get; set; } = string.Empty;
 

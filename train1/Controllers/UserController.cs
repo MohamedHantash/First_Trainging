@@ -40,6 +40,7 @@ namespace train1.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Registe(RegisterViewModel userVM)
         {
+
             if (ModelState.IsValid)
             {
                 ApplicationUser userModel = new ApplicationUser()
@@ -52,6 +53,15 @@ namespace train1.Controllers
                     PasswordHash = userVM.Password,
                     Address = userVM.Address,
                 };
+                var file = HttpContext.Request.Form.Files;
+                if (file.Count() > 0)
+                {
+                    string imageName = Guid.NewGuid().ToString() + Path.GetExtension(file[0].FileName);
+                    var fileStream = new FileStream(Path.Combine(@"wwwroot", "images", imageName), FileMode.Create);
+                    file[0].CopyTo(fileStream);
+                    userModel.ImageURL = imageName;
+                }
+                
                 IdentityResult result = await _userManager.CreateAsync(userModel, userVM.Password);
                 if (result.Succeeded)
                 {
@@ -99,13 +109,11 @@ namespace train1.Controllers
         {
             if(ModelState.IsValid)
             {
-                ApplicationUser userModel= await _userManager.FindByNameAsync(user.UserName);
-                if(userModel != null)
-                {
-                    await _userManager.UpdateAsync(userModel);
+                
+                   // await _userManager.UpdateAsync(user);
                     _userRepository.Save();
                     return RedirectToAction("GetAll");
-                }
+                
             }
             return View(user);
         }

@@ -53,8 +53,8 @@ namespace train1
 
             app.MapControllerRoute(
                 name: "default",
-                //pattern: "{controller=Home}/{action=Index}/{id?}");
-                pattern: "{controller=Account}/{action=Login}");
+                
+                pattern: "{controller=Account}/{action=Login}/{id?}");
             app.Run();
         }
     }

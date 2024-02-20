@@ -38,7 +38,7 @@ namespace train1.Controllers
                     if (found)
                     {
                        await _signInManager.SignInAsync(userModel, userVM.RememberMe);
-                        return RedirectToAction("GetAll","User");
+                        return RedirectToAction("Index","Home");
                     }
                     else
                         ModelState.AddModelError("", "UserName or Password is incorrect");
