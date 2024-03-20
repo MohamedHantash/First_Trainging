@@ -1,0 +1,37 @@
+﻿@model List<Product>
+@{
+    ViewData["Title"] = "Products";
+    Layout = "_ProductLayout";
+}
+<br />
+<br />
+<br />
+<br />
+<div style="border:solid;margin:10px 10px 10px 10px;padding:10px 10px 10px 10px">
+    <h1>Products</h1>
+    <h1>hadsfd @ViewBag.session</h1>
+    <form asp-action="Products" method="get">
+        <div class="form-actions no-color">
+            <p>
+                <select name="category" asp-items="@ViewBag.list" class="form-control">
+                    <option value="all">--Select Category--</option>
+                </select>
+                <input type="submit" value="Search" class="btn btn-success" />
+            </p>
+        </div>
+    </form>
+
+    @foreach (Product item in Model)
+    {
+        <div class="card" style="width:400px;border-block-color:blue;padding:10px">
+            <img src="~/images/@item.ImageURl" style="width:80px" >
+            <div class="container">
+                <h4> Name  = <b>@item.Name</b></h4>
+                <h4> Price = <b>@item.Price $</b></h4>
+                <h4> CategoryName = <b>@item.Category.Name</b></h4>
+                <h4> Description = <b>@item.Description</b> </h4>
+            </div>
+        </div>
+    }
+</div>
+

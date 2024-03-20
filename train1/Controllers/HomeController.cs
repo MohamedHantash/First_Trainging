@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using train1.Models;
-
 namespace train1.Controllers
 {
     public class HomeController : Controller
@@ -15,10 +14,20 @@ namespace train1.Controllers
         {
             _logger = logger;
         }
-        public IActionResult Index()
+        public IActionResult HomePage()
         {
+            // shopping page
+           HttpContext.Session.SetString("session","Mohamed khaled hantash");
             return View();
         }
+
+        public IActionResult Index()
+        {
+            // home page in admin dashbord
+            return View();
+        }
+        
+        
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

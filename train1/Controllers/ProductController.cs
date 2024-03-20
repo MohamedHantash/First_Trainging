@@ -13,13 +13,29 @@ namespace train1.Controllers
         private readonly ICategoryRepository _categoryRepository;
 
         public ProductController(IProductRepository productRepository,
-                 ICategoryRepository categoryRepository,
-                 Microsoft.AspNetCore.Hosting.IHostingEnvironment environment )
+                 ICategoryRepository categoryRepository)         
         {
             this._productRepository = productRepository;
             this._categoryRepository = categoryRepository;
           
         }
+        public IActionResult Products(int category)
+        {
+            List<Product> products = new List<Product>();
+            if (category == 0) 
+            {
+                products = _productRepository.GetAll();
+            }
+            else
+            {
+                products=_productRepository.GetAll().Where(p=>p.Category_Id == category).ToList();
+            }
+            var list =new SelectList(_categoryRepository.GetAll(),"Id","Name");
+            ViewData["list"] = list;
+            ViewBag.session = HttpContext.Session.GetString("session");
+            return View(products);
+        }
+
         public IActionResult GetAll()
         {
             List<Product> products = _productRepository.GetAll();

@@ -19,7 +19,7 @@ namespace train1.Controllers
             this._userManager = userManager;
             this._signInManager = signInManager;
         }
-
+        [Route("Admin")]
         public IActionResult Login()
         {
             return View();

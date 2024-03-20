@@ -1,3 +1,21 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using train1.Models;
@@ -31,7 +49,12 @@ namespace train1
 
            builder.Services.AddScoped<IUserRepository, UserRepository>();
            builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
-           builder.Services.AddScoped<IProductRepository, ProductRepository>(); 
+           builder.Services.AddScoped<IProductRepository, ProductRepository>();
+
+            // add serveices to session
+            builder.Services.AddSession();
+            builder.Services.AddDistributedMemoryCache();
+
 
 
             var app = builder.Build();
@@ -51,10 +74,12 @@ namespace train1
 
             app.UseAuthorization();
 
+            app.UseSession();
+
             app.MapControllerRoute(
                 name: "default",
                 
-                pattern: "{controller=Account}/{action=Login}/{id?}");
+                pattern: "{controller=Home}/{action=homepage}/{id?}");
             app.Run();
         }
     }
